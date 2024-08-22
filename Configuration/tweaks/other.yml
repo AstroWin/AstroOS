@@ -1,0 +1,67 @@
+---
+title: Random things
+description: Tweaks with no category.
+actions:
+  - !powerShell:
+    command: >-
+      $o = new-object -com shell.application;
+      $currentPins = $o.Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | ForEach-Object { $_.Path };
+      foreach ($path in @(
+          [Environment]::GetFolderPath('MyVideos'),
+          [Environment]::GetFolderPath('MyMusic')
+      )) {
+          if ($currentPins -notcontains $path) {
+              $o.Namespace($path).Self.InvokeVerb('pintohome')
+          }
+      }
+    runas: currentUser
+    wait: true
+
+    # OEM Information
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation'
+    value: 'Manufacturer'
+    data: 'AstroWin'
+    type: REG_SZ
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation'
+    value: 'SupportURL'
+    data: 'https://astrowin.is-a.dev'
+    type: REG_SZ
+
+  # Time configuration
+  # https://www.ntppool.org/
+  - !service: {name: 'w32time', operation: start, ignoreErrors: true}
+  - !run: {exe: 'w32tm', args: '/config /syncfromflags:manual /manualpeerlist:"0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org"'}
+  - !run: {exe: 'w32tm', args: '/config /update'}
+  - !run: {exe: 'w32tm', args: '/resync'}
+
+  # Desktop Notifications
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\PushNotifications', value: 'ToastEnabled', data: '0', type: REG_DWORD}
+  - !run: {exe: 'lodctr', args: '/r'}
+  - !run: {exe: 'lodctr', args: '/r'}
+  - !run: {exe: 'winmgmt', args: '/resyncperf'}
+
+  # Network
+  - !registryValue:
+    path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient'
+    value: 'EnableMulticast'
+    data: '0'
+    type: REG_DWORD
+  - !run {exe: 'Astro\other.cmd', exeDir: true}
+  - !registryValue:
+    path: 'HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters'
+    value: 'DisableBandwidthThrottling'
+    data: '1'
+    type: REG_DWORD
+  - !registryValue:
+    path: 'HKLM\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters'
+    value: 'RestrictNullSessAccess'
+    data: '1'
+    type: REG_DWORD
+  - !registryValue:
+    path: 'HKLM\SYSTEM\CurrentControlSet\Control\Lsa'
+    value: 'RestrictAnonymous'
+    data: '1'
+    type: REG_DWORD   
+     

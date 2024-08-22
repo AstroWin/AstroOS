@@ -1,0 +1,101 @@
+---
+title: APPX
+description: Removes APPX packages.
+actions:
+  - !writeStatus: {status: 'Removing APPX packages'}
+
+  - !taskKill: {name: 'msteams*', ignoreErrors: true}
+  - !appx: {name: 'MicrosoftTeams*', type: family}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications', value: 'ConfigureChatAutoInstall', data: '0', type: REG_DWORD}
+  - !taskKill: {name: 'ms-teams*', ignoreErrors: true}
+  - !appx: {name: 'MSTeams*', type: family}
+  - !appx: {name: 'Microsoft.Copilot*', type: family}
+  - !appx: {name: 'Clipchamp.Clipchamp*', type: family}
+  - !appx: {name: 'Disney.37853FC22B2CE*', type: family}
+  - !appx: {name: 'SpotifyAB.SpotifyMusic*', type: family}
+  - !appx: {name: '*Spotify*', type: family}
+  - !appx: {name: 'Microsoft.XboxGamingOverlay*', type: family}
+  - !appx: {name: 'Microsoft.ScreenSketch*', type: family}
+  - !appx: {name: 'Microsoft.GamingApp*', type: family}
+  - !appx: {name: 'Microsoft.549981C3F5F10*', type: family} # Cortana (deprecated)
+  - !appx: {name: 'Microsoft.XboxApp*', type: family}
+  - !appx: {name: 'microsoft.windowscommunicationsapps*', type: family}
+  - !appx: {name: 'Microsoft.MSPaint*', type: family}
+  - !appx: {name: 'Microsoft.Paint*', type: family}
+  - !appx: {name: 'Paint*', type: family}
+  - !appx: {name: 'Microsoft.Getstarted*', type: family}
+  - !appx: {name: 'Microsoft.ZuneVideo*', type: family}
+  - !appx: {name: 'MicrosoftCorporationII.MicrosoftFamily*', type: family}
+  - !appx: {name: 'Microsoft.MixedReality.Portal*', type: family}
+  - !appx: {name: 'Microsoft.Windows.DevHome*', type: family}
+  - !appx: {name: 'Microsoft.BingWeather*', type: family}
+  - !appx: {name: 'Microsoft.BingNews*', type: family}
+  - !appx: {name: 'Microsoft.BingSearch*', type: family}
+  - !appx: {name: '*Microsoft.ZuneMusic*', type: family, weight: 10}
+  - !appx: {name: 'Microsoft.OutlookForWindows*', type: family}
+  - !appx: {name: 'Microsoft.GetHelp*', type: family}
+  - !appx: {name: 'Microsoft.Microsoft3DViewer*', type: family}
+  - !appx: {name: 'Microsoft.MicrosoftOfficeHub*', type: family}
+  - !appx: {name: 'Microsoft.MicrosoftSolitaireCollection*', type: family}
+  - !appx: {name: 'Microsoft.MicrosoftStickyNotes*', type: family}
+  - !appx: {name: 'Microsoft.Office.OneNote*', type: family}
+  - !appx: {name: 'Microsoft.People*', type: family}
+  - !appx: {name: 'Microsoft.PowerAutomateDesktop*', type: family}
+  - !appx: {name: 'Microsoft.SkypeApp*', type: family}
+  - !appx: {name: 'Microsoft.Todos*', type: family}
+  - !appx: {name: 'Microsoft.WindowsAlarms*', type: family}
+  - !appx: {name: 'Microsoft.WindowsCamera*', type: family}
+  - !appx: {name: 'Microsoft.WindowsFeedbackHub*', type: family}
+  - !appx: {name: '*Microsoft.Windows.Photos*', type: family}
+  - !appx: {name: 'Microsoft.WindowsMaps*', type: family}
+  - !appx: {name: 'Microsoft.WindowsSoundRecorder*', type: family}
+  - !appx: {name: '*WindowsCalculator*', type: family}
+  - !appx: {name: '*MicrosoftCorporationII.QuickAssist*', type: family, weight: 10}
+  - !appx: {name: '*MicrosoftCorporationII.MicrosoftFamily*', type: family, weight: 10}
+  - !powerShell:
+    command: >-
+      Get-AppxPackage Microsoft.YourPhone* | Remove-AppxPackage;
+      Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.YourPhone' } | Remove-AppxProvisionedPackage -Online
+    runas: currentUserElevated
+    wait: true
+  - !appx: {operation: clearCache, name: '*MicrosoftWindows.Client.CBS*'}
+  - !appx: {operation: clearCache, name: '*Microsoft.Windows.Search*'}
+  - !appx: {operation: clearCache, name: '*Microsoft.Windows.SecHealthUI*'}
+
+  - !writeStatus: {status: 'Removing components'}
+
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run', value: 'SecurityHealth', operation: delete}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\CI\Policy', value: 'VerifiedAndReputablePolicyState', data: '0', type: REG_DWORD}
+  - !run: {exe: 'Edgeremover.exe', exeDir: true}
+  - !appx: {name: 'Microsoft.MicrosoftEdge_8wekyb3d8bbwe', type: family}
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.MicrosoftEdge.Stable_8wekyb3d8bbwe', operation: add}
+  - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.MicrosoftEdge_8wekyb3d8bbwe', operation: add}
+  - !run: {exeDir: true, exe: 'OneDrive.cmd'}
+
+  # ============= Windows Defender =============
+  - !writeStatus: {status: 'Removing Windows Defender', option: 'defender-disable'}
+  - !taskKill: {name: "NisSrv", option: 'defender-disable'}
+  - !taskKill: {name: "SecurityHealthHost", option: 'defender-disable'}
+  - !taskKill: {name: "SecurityHealthService", option: 'defender-disable'}
+  - !taskKill: {name: "SecurityHealthSystray", option: 'defender-disable'}
+  - !taskKill: {name: "SkypeBackgroundHost", option: 'defender-disable'}
+  - !taskKill: {name: "MsMpEng", option: 'defender-disable'}
+  - !taskKill: {name: "msiexec", option: 'defender-disable'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender', value: 'DisableAntiSpyware', data: '1', type: REG_DWORD, option: 'defender-disable'}
+
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\Windows Defender\\Windows Defender Cache Maintenance"
+    option: 'defender-disable'
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\Windows Defender\\Windows Defender Cleanup"
+    option: 'defender-disable'
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\Windows Defender\\Windows Defender Scheduled Scan"
+    option: 'defender-disable'
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\Windows Defender\\Windows Defender Verification"
+    option: 'defender-disable'
+    operation: delete
