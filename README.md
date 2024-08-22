@@ -4,7 +4,7 @@
 <p align="center">
   <a href="https://astrowin.is-a.dev" target="_blank">🌐 Website</a>
   •
-  <a href="https:/dsc.gg/enderdevcom" target="_blank">💬 Discord</a>
+  <a href="https://dsc.gg/enderdevcom" target="_blank">💬 Discord</a>
 </p>
 
 ## What is AstroOS?
