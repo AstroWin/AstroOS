@@ -1,5 +1,5 @@
 
-<h1 align="center">A transparent and lightweight modification to Windows, designed to optimize performance, privacy and usability.</h1>
+<h2 align="center">A transparent and lightweight modification to Windows, designed to optimize performance, privacy and usability.</h2>
 
 <p align="center">
   <a href="https://astrowin.is-a.dev" target="_blank">🌐 Website</a>
@@ -7,10 +7,10 @@
   <a href="https:/dsc.gg/enderdevcom" target="_blank">💬 Discord</a>
 </p>
 
-## What is Astro?
+## What is AstroOS?
 AstroOS is an open-source project that enhances Windows. Optimizations include enhanced privacy, usability, performance, and changes for minimal stutters.
 
-## 👀 Why AstroOS?
+## Why AstroOS?
 ### Privacy
 AstroOS removes the majority of telemetry embedded within Windows and implements numerous group policies to minimize data collection.
 
