@@ -20,6 +20,11 @@ actions:
   - !taskKill: {name: 'explorer'}
   - !cmd: {command: 'regedit.exe /s "wu.reg"', exeDir: true, option: 'auto-updates-disable', wait: true}
   - !cmd: {command: 'bcdedit /set {current} description "AstroOS"', exeDir: true, weight: 5, wait: true}
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance'
+    value: 'Enabled'
+    type: REG_DWORD
+    data: '1'
   - !cmd: {command: 'shutdown /r /t 10 /c "AstroOS Installation Completed Sucessfully. Your PC will restart soon."', exeDir: true, wait: false}
 
 
