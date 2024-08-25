@@ -60,6 +60,7 @@ actions:
   - !registryValue: {path: 'HKCR\dllfile\shell\runas\command', value: 'IsolatedCommand', type: REG_SZ, data: 'cmd.exe /c takeown /f "%1" && icacls "%1" /grant *S-1-3-4:F /c /l'}
   - !registryKey: {path: 'HKCR\exefile\shell\runas'}
   - !registryValue: {path: 'HKCR\exefile\shell\runas', value: 'HasLUAShield', type: REG_SZ, data: ''}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Internet Explorer\Main', value: 'Start Page', type: REG_SZ, data: 'https://astrowin.is-a.dev'}
   - !registryValue: {path: 'HKCR\exefile\shell\runas\command', value: '', type: REG_SZ, data: '"%1" %*'}
   - !registryValue: {path: 'HKCR\exefile\shell\runas\command', value: 'IsolatedCommand', type: REG_SZ, data: '"%1" %*'}
 
