@@ -25,6 +25,12 @@ actions:
     value: 'Enabled'
     type: REG_DWORD
     data: '1'
+  - !appx: {operation: clearCache, name: '*MicrosoftWindows.Client.CBS*'}
+  - !appx: {operation: clearCache, name: '*Client.CBS*'}
+  - !appx: {operation: clearCache, name: '*StartMenuExperienceHost*'}
+  - !appx: {operation: clearCache, name: '*TCUI*'}
+  - !appx: {operation: clearCache, name: '*Microsoft.Windows.Search*'}
+  - !appx: {operation: clearCache, name: '*Microsoft.Windows.SecHealthUI*'}  
   - !cmd: {command: 'shutdown /r /t 10 /c "AstroOS Installation Completed Sucessfully. Your PC will restart soon."', exeDir: true, wait: false}
 
 
