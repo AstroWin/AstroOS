@@ -1,5 +1,5 @@
 
-<h2 align="center">A transparent and lightweight modification to Windows, designed to optimize performance, privacy and usability.</h2>
+<h2 align="center">Windows Done correctly, designed to optimize performance, privacy and usability.</h2>
 
 <p align="center">
   <a href="https://astrowin.is-a.dev" target="_blank">🌐 Website</a>
