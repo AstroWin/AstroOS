@@ -58,9 +58,6 @@ actions:
       Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.YourPhone' } | Remove-AppxProvisionedPackage -Online
     runas: currentUserElevated
     wait: true
-  - !appx: {operation: clearCache, name: '*MicrosoftWindows.Client.CBS*'}
-  - !appx: {operation: clearCache, name: '*Microsoft.Windows.Search*'}
-  - !appx: {operation: clearCache, name: '*Microsoft.Windows.SecHealthUI*'}
 
   - !writeStatus: {status: 'Removing components'}
 
