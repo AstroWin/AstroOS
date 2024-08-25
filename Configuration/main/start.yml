@@ -11,7 +11,11 @@ actions:
     wait: true
     exeDir: true
     handleExitCodes: {'>1': halt}
-  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\PushNotifications', value: 'ToastEnabled', data: '0', type: REG_DWORD}  
+  - !registryValue:
+    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance'
+    value: 'Enabled'
+    type: REG_DWORD
+    data: '0'
   - !powerShell: 
     command: >-
       $guid = New-Guid;
