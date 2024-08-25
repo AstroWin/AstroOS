@@ -5,7 +5,6 @@ actions:
   - !task: {path: 'main\start.yml'}
   - !task: {path: 'main\appx.yml'}
   - !task: {path: 'main\services.yml'}
-  - !writeStatus: {status: 'Optimizing Windows'}
   - !task: {path: 'tweaks\debloat.yml'}
   - !task: {path: 'tweaks\other.yml'}
   - !task: {path: 'tweaks\performance.yml'}
