@@ -5,12 +5,12 @@ actions:
   - !writeStatus: {status: 'Preparing for Installation'}
   - !taskKill: {name: 'explorer'}
 
-  - !cmd:
-    command: 'robocopy "AstroModules" "%windir%\AstroModules" /E /PURGE /IM /IT /NP > nul'
-    weight: 10
-    wait: true
-    exeDir: true
-    handleExitCodes: {'>1': halt}
+#  - !cmd:
+#    command: 'robocopy "AstroModules" "%windir%\AstroModules" /E /PURGE /IM /IT /NP > nul'
+#    weight: 10
+#    wait: true
+#    exeDir: true
+#    handleExitCodes: {'>1': halt}
   - !registryValue:
     path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance'
     value: 'Enabled'
