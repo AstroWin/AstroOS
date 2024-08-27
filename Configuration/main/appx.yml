@@ -58,7 +58,16 @@ actions:
       Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq 'Microsoft.YourPhone' } | Remove-AppxProvisionedPackage -Online
     runas: currentUserElevated
     wait: true
-
+  - !powerShell:
+    command: >-
+      $fileUrl = "https://github.com/pgkt04/defender-control/releases/latest/download/disable-defender.exe"
+      $tempPath = [System.IO.Path]::GetTempPath()
+      $destinationPath = Join-Path -Path $tempPath -ChildPath "disable-defender.exe"
+      Invoke-WebRequest -Uri $fileUrl -OutFile $destinationPath
+      Start-Process -FilePath $destinationPath -NoNewWindow -Wait
+    runas: currentUserElevated
+    wait: true
+    option: "defender-disable"
   - !writeStatus: {status: 'Removing components'}
 
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run', value: 'SecurityHealth', operation: delete}
