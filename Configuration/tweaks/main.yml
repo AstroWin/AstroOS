@@ -6,6 +6,7 @@ actions:
     # Bcdedit
   - !run: {exe: 'bcdedit', args: '/timeout 10'}
   - !run: {exe: 'bcdedit', args: '/set {bootloadersettings} bootmenupolicy legacy'}
+  - !cmd: {command: 'bcdedit /set {current} description "AstroOS"', exeDir: true, weight: 5, wait: true}
 
   - !registryValue:
     path: 'HKCU\Control Panel\Desktop'
