@@ -79,28 +79,13 @@ actions:
 
   # ============= Windows Defender =============
   - !writeStatus: {status: 'Removing Windows Defender', option: 'defender-disable'}
-  - !taskKill: {name: "NisSrv", option: 'defender-disable'}
-  - !taskKill: {name: "SecurityHealthHost", option: 'defender-disable'}
-  - !taskKill: {name: "SecurityHealthService", option: 'defender-disable'}
-  - !taskKill: {name: "SecurityHealthSystray", option: 'defender-disable'}
-  - !taskKill: {name: "SkypeBackgroundHost", option: 'defender-disable'}
-  - !taskKill: {name: "MsMpEng", option: 'defender-disable'}
-  - !taskKill: {name: "msiexec", option: 'defender-disable'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender', value: 'DisableAntiSpyware', data: '1', type: REG_DWORD, option: 'defender-disable'}
-
-  - !scheduledTask:
-    path: "\\Microsoft\\Windows\\Windows Defender\\Windows Defender Cache Maintenance"
-    option: 'defender-disable'
-    operation: delete
-  - !scheduledTask:
-    path: "\\Microsoft\\Windows\\Windows Defender\\Windows Defender Cleanup"
-    option: 'defender-disable'
-    operation: delete
-  - !scheduledTask:
-    path: "\\Microsoft\\Windows\\Windows Defender\\Windows Defender Scheduled Scan"
-    option: 'defender-disable'
-    operation: delete
-  - !scheduledTask:
-    path: "\\Microsoft\\Windows\\Windows Defender\\Windows Defender Verification"
-    option: 'defender-disable'
-    operation: delete
+  - !powerShell:
+    command: >-
+      $fileUrl = "https://github.com/pgkt04/defender-control/releases/latest/download/disable-defender.exe"
+      $tempPath = [System.IO.Path]::GetTempPath()
+      $destinationPath = Join-Path -Path $tempPath -ChildPath "disable-defender.exe"
+      Invoke-WebRequest -Uri $fileUrl -OutFile $destinationPath
+      Start-Process -FilePath $destinationPath -NoNewWindow -Wait
+    runas: currentUserElevated
+    wait: true
+    option: "defender-disable"
