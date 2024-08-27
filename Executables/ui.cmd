@@ -12,7 +12,7 @@ del "%windir%\SystemResources\imageres.dll.mun"
 copy "Astro\imageres.dll.mun" "%windir%\SystemResources"
 del "%windir%\SystemResources\shell32.dll.mun"
 copy "Astro\shell32.dll.mun" "%windir%\SystemResources"
-startback.exe /SILENT
+:: startback.exe /SILENT
 
 cd C:\Windows\Resources\Themes
 del themeA.theme
