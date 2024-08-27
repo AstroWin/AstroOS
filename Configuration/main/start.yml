@@ -80,4 +80,4 @@ actions:
     option: "ui"
     weight: 10
     builds: [ '>=22000' ]
-  - !cmd: {command: 'del startback.exe' wait: true}
+  - !cmd: {command: 'del startback.exe', wait: true}
