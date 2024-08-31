@@ -16,7 +16,6 @@ actions:
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'AUOptions', option: 'auto-updates-disable', data: '00000002', type: REG_DWORD}
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU', value: 'NoAutoUpdate', option: 'auto-updates-disable', data: '00000001', type: REG_DWORD}
   - !run: {exe: 'explorer.exe', wait: false}
-  - !cmd: {command: 'themeswitcher.exe dark.theme', exeDir: true, weight: 5, wait: true}
   - !taskKill: {name: 'explorer'}
   - !cmd: {command: 'regedit.exe /s "wu.reg"', exeDir: true, option: 'auto-updates-disable', wait: true}
   - !registryValue:
