@@ -11,11 +11,6 @@ actions:
 #    wait: true
 #    exeDir: true
 #    handleExitCodes: {'>1': halt}
-  - !registryValue:
-    path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance'
-    value: 'Enabled'
-    type: REG_DWORD
-    data: '0'
   - !powerShell: 
     command: >-
       powercfg.exe /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
@@ -80,4 +75,3 @@ actions:
     option: "ui"
     weight: 10
     builds: [ '>=22000' ]
-  - !cmd: {command: 'del startback.exe'}
