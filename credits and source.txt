@@ -1,1 +1,13 @@
 Credits and Link for the source code of apps we use.
+
+Edgeremover.exe:
+Credits: https://github.com/ShadowWhisperer/
+Source: https://github.com/ShadowWhisperer/Remove-MS-Edge
+
+defender.exe:
+Credits: https://github.com/pgkt04/
+Source: https://github.com/pgkt04/defender-control
+
+winver.exe:
+Credits: https://github.com/rounk-ctrl/
+Source: https://github.com/rounk-ctrl/Winver
