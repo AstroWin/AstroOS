@@ -1,7 +1,0 @@
-Windows Registry Editor Version 5.00
-
-[HKEY_LOCAL_MACHINE\Astro]
-"Build"=""
-"InstalledVer"="2.0.0"
-"IsInstalled"="YES"
-"Version"="11"

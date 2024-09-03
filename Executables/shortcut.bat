@@ -1,2 +1,0 @@
-powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%USERPROFILE%\Desktop\Install Software.lnk'); $s.TargetPath='%windir%\AstroModules\Scripts\InstallSoftware.cmd'; $s.IconLocation='%windir%\AstroModules\download.ico'; $s.Save()"
-exit
