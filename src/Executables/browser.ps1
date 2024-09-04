@@ -1,6 +1,7 @@
 param (
 	[switch]$Brave,
 	[switch]$Firefox,
+	[switch]$Thorium,
 	[switch]$Ui,
 	[switch]$Defender,
 	[switch]$Sab,
@@ -38,6 +39,16 @@ if ($Firefox) {
 	Start-Process -FilePath "$tempDir\firefox.exe" -WindowStyle Hidden -ArgumentList '/S /ALLUSERS=1' -Wait 2>&1 | Out-Null
 	exit
 }
+
+# Install Thorium browser
+if ($Thorium) {
+	Write-Output "Downloading Thorium..."
+	$installer_link = ((Invoke-RestMethod -Uri "https://api.github.com/repos/Alex313031/Thorium-Win/releases/latest" -Headers @{ "User-Agent" = "Mozilla/5.0" }).assets | Where-Object { $_.name -like "*mini_installer.exe" }).browser_download_url
+	& curl.exe -LSs "https://github.com/Alex313031/Thorium-Win/releases/download/M126.0.6478.251/thorium_Th24_mini_installer.exe" -o "$tempDir\thorium.exe"
+	Start-Process -FilePath "$tempDir\thorium.exe" -WindowStyle Hidden 2>&1 | Out-Null
+	exit
+}
+
 
 # Install StartAllBack
 if ($Ui) {
