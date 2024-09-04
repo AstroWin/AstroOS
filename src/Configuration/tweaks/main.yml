@@ -620,12 +620,7 @@ actions:
   - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\DevHomeUpdate', value: 'workCompleted', type: REG_DWORD, data: '1'}
   - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\OutlookUpdate', value: 'workCompleted', type: REG_DWORD, data: '1'}
-  - !cmd:
-    command: 'reg import "dua.reg"'
-    exeDir: true
-    wait: true
-    option: 'auto-updates-disable'      
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\OutlookUpdate', value: 'workCompleted', type: REG_DWORD, data: '1'}     
   - !registryValue:
     path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization'
     value: 'DODownloadMode'
