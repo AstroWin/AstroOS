@@ -7,10 +7,6 @@ actions:
     command: '.\Astro\filesharing.ps1'
     exeDir: true
     wait: true
-  - !cmd:
-    command: '"Astro\searchindex.cmd'
-    exeDir: true
-    wait: true
   - !service: {name: 'OneSyncSvc', operation: change, startup: 4}
   - !service: {name: 'TrkWks', operation: change, startup: 4}
   - !service: {name: 'PcaSvc', operation: change, startup: 4}

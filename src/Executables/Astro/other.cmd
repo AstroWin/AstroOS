@@ -1,5 +1,8 @@
 @REM copy /y "Associations.dll" "%WINDIR%\System32\OEMDefaultAssociations.dll"
 copy /y "OEMDefaultAssociations.xml" "%WINDIR%\System32\OEMDefaultAssociations.xml"
+setlocal EnableDelayedExpansion
+sc config WSearch start=disabled > nul
+sc stop WSearch > nul 2>&1
 
 @echo OFF
 for /f "usebackq tokens=2 delims=\" %%A in (`reg query "HKEY_USERS" ^| findstr /r /x /c:"HKEY_USERS\\S-.*" /c:"HKEY_USERS\\AME_UserHive_[^_]*"`) do (

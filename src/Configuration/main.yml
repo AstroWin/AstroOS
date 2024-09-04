@@ -35,8 +35,6 @@ actions:
 #  - !writeStatus: {status: 'Almost done'}
 #  - !cmd: {command: 'shortcut.bat', exeDir: true, wait: true}
 #  - !run: {exe: 'startup.bat', exeDir: true, wait: true}
-#  - !file {path: 'C:\Program Files\BraveSoftware\Brave-Browser\Application\initial_preferences'} (deprecated)
-#  - !cmd: {command: 'copy "initial_preferences" "C:\Program Files\BraveSoftware\Brave-Browser\Application"', exeDir: true, wait: true} (deprecated)
 #  - !cmd:
 #    command: 'regedit.exe /s "astro11.reg"'
 #    exeDir: true

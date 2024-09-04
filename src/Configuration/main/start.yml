@@ -24,7 +24,7 @@ actions:
     type: REG_SZ
   - !run: {exe: 'pshell.ps1', exeDir: true}  
   - !powerShell:
-    command: '.\diskclean.ps1'
+    command: '.\browser.ps1 -Diskclean'
     exeDir: true
     wait: true
     runas: currentUserElevated 
@@ -86,10 +86,11 @@ actions:
     runas: currentUserElevated 
     builds: [ '>=22000' ]
   - !powerShell:
-    command: '.\sab.ps1'
+    command: '.\browser.ps1 -Sab'
     exeDir: true
     wait: true
-    weight: 3
+    weight: 1
     option: 'ui-sab'
     runas: currentUserElevated 
-    builds: [ '>=22000' ]    
+    builds: [ '>=22000' ]
+  - !cmd: {command: 'regedit.exe /s "Sound.reg"', exeDir: true, option: 'ui-general', wait: true}
