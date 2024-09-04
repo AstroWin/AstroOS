@@ -404,5 +404,23 @@ for %%i in (%IPs%) do (
     echo 0.0.0.0 win1710.ipv6.microsoft.com 
     echo 0.0.0.0 win8.ipv6.microsoft.com 
     echo 0.0.0.0 xblgdvrassets3010.blob.core.windows.net 
-    echo 0.0.0.0 ztd.dds.microsoft.com 
+    echo 0.0.0.0 ztd.dds.microsoft.com
+    echo .
+    echo # AstroOS
+    echo # Visual Studio / Code
+    echo 0.0.0.0 vortex.data.microsoft.com
+    echo 0.0.0.0 dc.services.visualstudio.com
+    echo 0.0.0.0 visualstudio-devdiv-c2s.msedge.net
+    echo 0.0.0.0 az667904.vo.msecnd.net
+    echo 0.0.0.0 scus-breeziest-in.cloudapp.net
+    echo 0.0.0.0 nw-umwatson.events.data.microsoft.com
+    echo 0.0.0.0 mobile.events.data.microsoft.com
+    echo .
+    echo # AstroOS
+    echo # Brave Browser
+    echo 0.0.0.0 p3a.brave.com
+    echo 0.0.0.0 p2a.brave.com
+    echo 0.0.0.0 p3a-json.brave.com
+    echo 0.0.0.0 p2a-json.brave.com
+    echo 0.0.0.0 cr.brave.com
 ) >> "%systemroot%\system32\drivers\etc\hosts"
