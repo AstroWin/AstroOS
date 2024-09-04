@@ -22,7 +22,6 @@ actions:
     value: 'ExecutionPolicy'
     data: 'Unrestricted'
     type: REG_SZ
-  - !run: {exe: 'pshell.ps1', exeDir: true}  
   - !powerShell:
     command: '.\browser.ps1 -Diskclean'
     exeDir: true
