@@ -76,6 +76,7 @@ actions:
     weight: 120
     option: 'browser-thorium'
     runas: currentUserElevated
+  - !cmd {command: 'taskkill /F /IM "thorium.exe" /T >nul 2>&1', option: 'browser-thorium', wait: false}
 
     # Improve UI
   - !writeStatus: {status: 'Configuring UI', option: "ui"}

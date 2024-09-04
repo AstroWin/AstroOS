@@ -23,7 +23,7 @@ actions:
   - !appx: {operation: clearCache, name: '*StartMenuExperienceHost*'}
   - !appx: {operation: clearCache, name: '*TCUI*'}
   - !appx: {operation: clearCache, name: '*Microsoft.Windows.Search*'}
-  - !appx: {operation: clearCache, name: '*Microsoft.Windows.SecHealthUI*'}  
+  - !appx: {operation: clearCache, name: '*Microsoft.Windows.SecHealthUI*'}
 
 
 # ======================================
