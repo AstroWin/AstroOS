@@ -68,15 +68,14 @@ actions:
     option: 'browser-firefox'
     runas: currentUserElevated
 
-#  - !writeStatus: {status: 'Installing Thorium', option: 'browser-thorium'}
-#  - !powerShell:
-#    command: '.\browser.ps1 -Thorium'
-#    exeDir: true
-#    wait: true
-#    weight: 120
-#    option: 'browser-thorium'
-#    runas: currentUserElevated
-#  - !cmd {command: 'taskkill /F /IM "thorium.exe" /T >nul 2>&1', option: 'browser-thorium', wait: false}
+  - !writeStatus: {status: 'Installing Thorium', option: 'browser-thorium'}
+  - !powerShell:
+    command: '.\browser.ps1 -Thorium'
+    exeDir: true
+    wait: true
+    weight: 120
+    option: 'browser-thorium'
+    runas: currentUserElevated
 
     # Improve UI
   - !writeStatus: {status: 'Configuring UI', option: "ui"}
