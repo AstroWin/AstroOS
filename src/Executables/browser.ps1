@@ -5,7 +5,8 @@ param (
 	[switch]$Ui,
 	[switch]$Defender,
 	[switch]$Sab,
-	[switch]$Diskclean
+	[switch]$Diskclean,
+	[switch]$Edge
 )
 
 $tempDir = Join-Path -Path $([System.IO.Path]::GetTempPath()) -ChildPath $([System.Guid]::NewGuid())
@@ -102,6 +103,13 @@ if ($Sab) {
 if ($Defender) {
 	& curl.exe -LSs "https://github.com/pgkt04/defender-control/releases/latest/download/disable-defender.exe" -o "$tempDir\defender.exe"
 	& "$tempDir\defender.exe" -s 2>&1 | Out-Null
+	exit
+}
+
+# Download Edge Remover
+if ($Defender) {
+	& curl.exe -LSs "https://github.com/ShadowWhisperer/Remove-MS-Edge/blob/main/Remove-NoTerm.exe" -o "$tempDir\edgeremover.exe"
+	& "$tempDir\edgeremover.exe" -s 2>&1 | Out-Null
 	exit
 }
 
