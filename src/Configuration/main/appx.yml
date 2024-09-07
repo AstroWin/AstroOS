@@ -2,7 +2,7 @@
 title: APPX
 description: Removes APPX packages.
 actions:
-  - !writeStatus: {status: 'Removing APPX packages'}
+  - !writeStatus: {status: 'Removing bloatware from the OS'}
 
   - !taskKill: {name: 'msteams*', ignoreErrors: true}
   - !appx: {name: 'MicrosoftTeams*', type: family}
