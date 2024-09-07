@@ -2,7 +2,7 @@
 title: Start Configuration
 description: Start configuration.
 actions:
-  - !writeStatus: {status: 'Preparing for Installation'}
+  - !writeStatus: {status: 'Preparing the system for Installation'}
   - !taskKill: {name: 'explorer'}
 
       # Not Used Anymore
