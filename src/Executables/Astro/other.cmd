@@ -57,6 +57,22 @@ for %%i in (%IPs%) do (
 (
     echo.
     echo # Added by AstroOS
+    echo.
+    echo # MalwareInvestigation - start
+    echo 0.0.0.0 acabstealer.ru
+    echo 0.0.0.0 dieserbenni.ru
+    echo 0.0.0.0 1312stealer.ru
+    echo 0.0.0.0 1312services.ru
+    echo 0.0.0.0 kleinanzeigen.ru
+    echo 0.0.0.0 funcaptcha.ru
+    echo 0.0.0.0 revengedrainer.com
+    echo 0.0.0.0 cosmoplwnets.xyz
+    # sus ips:
+    echo 0.0.0.0 45.11.229.96
+    echo 0.0.0.0 2.56.245.243
+    echo.
+    echo # MalwareInvestigation - end
+    echo.
     echo # https://github.com/crazy-max
     echo 0.0.0.0 1oavsblobprodcus350.blob.core.windows.net 
     echo 0.0.0.0 37bvsblobprodcus311.blob.core.windows.net 
