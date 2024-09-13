@@ -26,3 +26,6 @@ AstroOS applies many modifications and default settings to make Windows easier t
 ### Open source
 
 Unlike custom Windows ISOs, AstroOS is more straightforward to audit due to the use of [AME Wizard](https://ameliorated.io). AME Wizard is controlled by Playbooks, a customizable script-esque system that can perform various tasks.
+
+## Become a developer
+Become a developer of AstroOS and help us build Windows Done Correctly. **If you want to do this, click [here](https://forms.office.com/r/dvi0pZ7cSV)**
