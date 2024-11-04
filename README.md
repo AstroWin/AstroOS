@@ -1,5 +1,7 @@
-
-<h2 align="center">Windows Done correctly, designed to optimize performance, privacy and usability.</h2>
+<div align="center">
+  <img src="https://raw.githubusercontent.com/AstroWin/.github/refs/heads/main/icon.png"  />
+</div>
+<h2 align="center">Windows Done correctly, that fixes most of the problems with Windows.</h2>
 
 <p align="center">
   <a href="https://astrowin.is-a.dev" target="_blank">🌐 Website</a>
@@ -8,24 +10,20 @@
 </p>
 
 ## What is AstroOS?
-AstroOS is an open-source project that enhances Windows. Optimizations include enhanced privacy, usability, performance, and changes for minimal stutters.
+AstroOS is an open-source OS, that fixes most of the problems with Windows.
 
-## Why AstroOS?
+## Why you should choose AstroOS?
 ### Privacy
-AstroOS removes the majority of telemetry embedded within Windows and implements numerous group policies to minimize data collection.
+AstroOS removes most of the telemetry in Windows. 
 
 ### Performance
-AstroOS implements numerous meaningful changes to improve Windows performance and responsiveness without breaking essential features.
+AstroOS enhances performance by removing bloat, optimizing your Windows settings and much more.
 
 ### Security
-AstroOS doesn't turn off security features such as Windows Defender and Windows Update.
-
-### Usability
-AstroOS applies many modifications and settings to make Windows easier to use.
+AstroOS doesn't remove security features like Windows Defender and Windows Update.
 
 ### Open source
+Unlike some Windows mods that use Custom ISOs, AstroOS uses playbooks. This makes AstroOS much better and fully open-source!
 
-Unlike custom Windows ISOs, AstroOS is more straightforward to audit due to the use of [AME Wizard](https://ameliorated.io). AME Wizard is controlled by Playbooks, a customizable script-esque system that can perform various tasks.
-
-## Become a developer
-Become a developer of AstroOS and help us build Windows Done Correctly. **If you want to do this, click [here](https://forms.office.com/r/dvi0pZ7cSV)**
+# Contribute
+You can contribute to AstroOS by making pull requests on [our repo](https://github.com/AstroWin/AstroOS) or becoming a developer by [clicking here](https://forms.office.com/r/dvi0pZ7cSV) and filling out the form. Make sure you're in [my server](https://dsc.gg/justwinstuff) to get accepted.
