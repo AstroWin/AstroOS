@@ -21,7 +21,7 @@ AstroOS implements numerous meaningful changes to improve Windows performance an
 AstroOS doesn't turn off security features such as Windows Defender and Windows Update.
 
 ### Usability
-AstroOS applies many modifications and default settings to make Windows easier to use.
+AstroOS applies many modifications and settings to make Windows easier to use.
 
 ### Open source
 
