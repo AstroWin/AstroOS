@@ -59,6 +59,13 @@ if ($Thorium) {
     exit
 }
 
+# Install Zen Browser
+if ($Zen) {
+	Write-Output "Downloading Zen..."
+	& curl.exe -LSs "https://github.com/zen-browser/desktop/releases/latest/download/zen.installer.exe" -o "$tempDir\zen.exe"
+	Start-Process -FilePath "$tempDir\zen.exe" -WindowStyle Hidden -ArgumentList '/S /ALLUSERS=1' -Wait 2>&1 | Out-Null
+	exit
+}
 
 # Install StartAllBack
 if ($Ui) {
@@ -70,7 +77,7 @@ if ($Ui) {
 
 # Activate StartAllBack
 if ($Sab) {
-	# https://github.com/winbo-yml-exe
+	# https://github.com/komaru-meow
   Stop-Process -Name StartAllBackCfg -ErrorAction SilentlyContinue
   
   $DLL = "StartAllBack\StartAllBackX64.dll"
@@ -109,26 +116,17 @@ if ($Defender) {
 # Edge remover (thanks to ShadowWhisperer for the script base)
 if ($Remove_edge) {
     $winusrid = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
-
-    # Remove Edge-related registry keys
     @(
         "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Edge",
         "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{9459C573-B17A-45AE-9F64-1857B5D58CEE}"
     ) | ForEach-Object { Remove-Item -Path $_ -Recurse -Force -ErrorAction SilentlyContinue }
-
-    # Download the Edge uninstaller
     curl.exe -LSs "https://github.com/ShadowWhisperer/Remove-MS-Edge/raw/main/_Source/setup.exe" -o "$tempDir\edge_setup.exe"
-
-    # Uninstall Edge if it exists
     if (Test-Path "C:\Program Files (x86)\Microsoft\Edge\Application") {
         Start-Process -FilePath "cmd.exe" -ArgumentList "/c `"$tempDir\edge_setup.exe`" --uninstall --system-level --force-uninstall > NUL 2>&1" -NoNewWindow -Wait
         Start-Sleep -Seconds 2
     }
-
-    # Remove Edge apps
     $usrsid = (New-Object System.Security.Principal.NTAccount($env:USERNAME)).Translate([System.Security.Principal.SecurityIdentifier]).Value
     $edgeappx = Get-AppxPackage -AllUsers | Where-Object { $_.PackageFullName -like "*microsoftedge*" } | Select-Object -ExpandProperty PackageFullName
-
     foreach ($app in $edgeappx) {
         if ($app -notlike '*MicrosoftEdgeDevTools*') {
             $endOfLifePaths = @(
@@ -141,11 +139,7 @@ if ($Remove_edge) {
             Remove-AppxPackage -Package $app -AllUsers -ErrorAction SilentlyContinue
         }
     }
-
-    # Remove directories and registry keys
     Remove-Item -Path "C:\ProgramData\Microsoft\EdgeUpdate" -Recurse -Force -ErrorAction SilentlyContinue
-
-    # Remove shortcuts from user desktops
     Get-ChildItem -Path "C:\Users" -Directory | ForEach-Object {
         $desktopPath = Join-Path -Path $_.FullName -ChildPath "Desktop"
         if (Test-Path $desktopPath) {
@@ -157,44 +151,28 @@ if ($Remove_edge) {
             }
         }
     }
-
-    # Remove scheduled tasks related to Edge
     $tasks = schtasks /query /fo csv | Select-Object -Skip 1 | Where-Object { $_ -match 'MicrosoftEdge' } | ForEach-Object {($_.Split(',')[0] -replace '"', '').Trim()}
     $tasks | ForEach-Object { schtasks /delete /tn $_ /f | Out-Null }
-
-    # Remove Edge-related tasks from the System32 directory
     Get-ChildItem "C:\Windows\System32\Tasks" -Recurse -File -Name | Where-Object { $_ -like "MicrosoftEdge*" } | ForEach-Object { Remove-Item "C:\Windows\System32\Tasks\$_" -Force -ErrorAction SilentlyContinue }
-
-    # Remove Edge services and registry entries
     foreach ($svc in @("edgeupdate", "edgeupdatem")) {
         sc.exe delete $svc 2>&1 | Out-Null
         if ($LASTEXITCODE -eq 0) {
             Remove-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Services\$svc" -Recurse -Force -ErrorAction SilentlyContinue 
         }
     }
-
-    # Remove Edge registry keys if Edge executable is not found
     if (!(Test-Path "C:\Program Files (x86)\Microsoft\Edge\Application\pwahelper.exe")) {
         Remove-Item -Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Edge" -Recurse -Force -ErrorAction SilentlyContinue 
     }
-
-    # Remove Edge-related directories
     Get-ChildItem "C:\Windows\SystemApps" -Directory -Recurse | Where-Object { $_.Name -like "Microsoft.MicrosoftEdge*" } | ForEach-Object {
         Start-Process -FilePath "cmd.exe" -ArgumentList "/c takeown /f `"$($_.FullName)`" /r /d y && icacls `"$($_.FullName)`" /grant administrators:F /t && rd /s /q `"$($_.FullName)`" > NUL 2>&1" -NoNewWindow -Wait | Out-Null
     }
-
-    # Remove Microsoft Edge executables
     Get-ChildItem "C:\Windows\System32" -Filter "MicrosoftEdge*.exe" | ForEach-Object {
         $filePath = $_.FullName
         Start-Process -FilePath "cmd.exe" -ArgumentList "/c takeown /f `"$filePath`" > NUL 2>&1" -NoNewWindow -Wait | Out-Null
         Start-Process -FilePath "cmd.exe" -ArgumentList "/c icacls `"$filePath`" /inheritance:e /grant `"$winusrid`:(OI)(CI)F /T /C" -NoNewWindow -Wait | Out-Null
         Remove-Item -Path $filePath -Force -ErrorAction SilentlyContinue
     }
-
-    # Remove Edge .dat file
     Remove-Item -Path "C:\Program Files (x86)\Microsoft\Edge\Edge.dat" -Force -ErrorAction SilentlyContinue
-
-    # Remove Temp directory
     Remove-Item -Path "C:\Program Files (x86)\Microsoft\Temp" -Recurse -Force -ErrorAction SilentlyContinue
 }
 

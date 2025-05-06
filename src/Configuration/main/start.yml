@@ -2,103 +2,141 @@
 title: Start Configuration
 description: Start configuration.
 actions:
-  - !writeStatus: {status: 'Preparing the system for Installation'}
-  - !taskKill: {name: 'explorer'}
+  - !writeStatus: { status: "Preparing the system for Installation" }
+  - !taskKill: { name: "explorer" }
 
-      # Not Used Anymore
-#  - !cmd:
-#    command: 'robocopy "AstroModules" "%windir%\AstroModules" /E /PURGE /IM /IT /NP > nul'
-#    weight: 10
-#    wait: true
-#    exeDir: true
-#    handleExitCodes: {'>1': halt}
-  - !powerShell: 
+    # Not Used Anymore
+  #  - !cmd:
+  #    command: 'robocopy "AstroModules" "%windir%\AstroModules" /E /PURGE /IM /IT /NP > nul'
+  #    weight: 10
+  #    wait: true
+  #    exeDir: true
+  #    handleExitCodes: {'>1': halt}
+  - !powerShell:
     command: >-
       powercfg.exe /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
-  - !cmd: {command: 'setx POWERSHELL_TELEMETRY_OPTOUT 1'}
-  - !cmd: {command: 'ftype Microsoft.PowerShellScript.1="%windir%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -EP Unrestricted -File "%1" %*'}
+  - !cmd: { command: "setx POWERSHELL_TELEMETRY_OPTOUT 1" }
+  - !cmd: {
+      command: 'ftype Microsoft.PowerShellScript.1="%windir%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -EP Unrestricted -File "%1" %*',
+    }
   - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell'
-    value: 'ExecutionPolicy'
-    data: 'Unrestricted'
+    value: "ExecutionPolicy"
+    data: "Unrestricted"
     type: REG_SZ
   - !powerShell:
     command: '.\browser.ps1 -Diskclean'
     exeDir: true
     wait: true
-    runas: currentUserElevated 
-  - !run: {exe: 'DISM.exe', args: '/Online /Enable-Feature /FeatureName:"DirectPlay" /NoRestart /All', weight: 30}
-  - !run: {exe: 'DISM.exe', args: '/Online /Disable-Feature /FeatureName:"Internet-Explorer-Optional-amd64" /NoRestart', weight: 30, builds: [ '<22000' ]}
-  - !run: {exe: 'DISM.exe', args: '/Online /Remove-Capability /CapabilityName:"MathRecognizer~~~~0.0.1.0" /NoRestart', weight: 30, builds: [ '<22000' ]}
-  - !run: {exe: 'DISM.exe', args: '/Online /Remove-Capability /CapabilityName:"App.StepsRecorder~~~~0.0.1.0" /NoRestart', weight: 30}
-  - !run: {exe: 'DISM.exe', args: '/Online /Cleanup-Image /StartComponentCleanup', weight: 50}
+    runas: currentUserElevated
+  - !run: {
+      exe: "DISM.exe",
+      args: '/Online /Enable-Feature /FeatureName:"DirectPlay" /NoRestart /All',
+      weight: 30,
+    }
+  - !run: {
+      exe: "DISM.exe",
+      args: '/Online /Disable-Feature /FeatureName:"Internet-Explorer-Optional-amd64" /NoRestart',
+      weight: 30,
+      builds: ["<22000"],
+    }
+  - !run: {
+      exe: "DISM.exe",
+      args: '/Online /Remove-Capability /CapabilityName:"MathRecognizer~~~~0.0.1.0" /NoRestart',
+      weight: 30,
+      builds: ["<22000"],
+    }
+  - !run: {
+      exe: "DISM.exe",
+      args: '/Online /Remove-Capability /CapabilityName:"App.StepsRecorder~~~~0.0.1.0" /NoRestart',
+      weight: 30,
+    }
+  - !run: {
+      exe: "DISM.exe",
+      args: "/Online /Cleanup-Image /StartComponentCleanup",
+      weight: 50,
+    }
 
     # Run on Windows 10
   - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'
-    value: 'SettingsPageVisibility'
-    data: 'hide:recovery;maps;maps-downloadmaps;cortana-windowssearch;privacy;privacy-speechtyping;privacy-speech;privacy-feedback;privacy-activityhistory;search-permissions;privacy-general;sync;mobile-devices;mobile-devices-addphone;workplace;backup'
+    value: "SettingsPageVisibility"
+    data: "hide:recovery;maps;maps-downloadmaps;cortana-windowssearch;privacy;privacy-speechtyping;privacy-speech;privacy-feedback;privacy-activityhistory;search-permissions;privacy-general;sync;mobile-devices;mobile-devices-addphone;workplace;backup"
     type: REG_SZ
-    builds: [ '<22000' ]
+    builds: ["<22000"]
 
     # Run on Windows 11
   - !registryValue:
     path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'
-    value: 'SettingsPageVisibility'
-    data: 'hide:recovery;maps;maps-downloadmaps;cortana-windowssearch;privacy;privacy-feedback;privacy-activityhistory;search-permissions;privacy-general;sync;mobile-devices;mobile-devices-addphone;workplace;family-group;deviceusage;home'
+    value: "SettingsPageVisibility"
+    data: "hide:recovery;maps;maps-downloadmaps;cortana-windowssearch;privacy;privacy-feedback;privacy-activityhistory;search-permissions;privacy-general;sync;mobile-devices;mobile-devices-addphone;workplace;family-group;deviceusage;home"
     type: REG_SZ
-    builds: [ '>=22000' ]
+    builds: [">=22000"]
 
     # Install Browsers
-  - !writeStatus: {status: 'Installing Brave', option: 'browser-brave'}
+  - !writeStatus: { status: "Installing Brave", option: "browser-brave" }
   - !powerShell:
     command: '.\browser.ps1 -Brave'
     exeDir: true
     wait: true
     weight: 120
-    option: 'browser-brave'
+    option: "browser-brave"
     runas: currentUserElevated
 
-  - !writeStatus: {status: 'Installing Firefox', option: 'browser-firefox'}
+  - !writeStatus: { status: "Installing Firefox", option: "browser-firefox" }
   - !powerShell:
     command: '.\browser.ps1 -Firefox'
     exeDir: true
     wait: true
     weight: 120
-    option: 'browser-firefox'
+    option: "browser-firefox"
     runas: currentUserElevated
 
-  - !writeStatus: {status: 'Installing Thorium', option: 'browser-thorium'}
+  - !writeStatus: { status: "Installing Thorium", option: "browser-thorium" }
   - !powerShell:
     command: '.\browser.ps1 -Thorium'
     exeDir: true
     wait: true
     weight: 120
-    option: 'browser-thorium'
+    option: "browser-thorium"
+    runas: currentUserElevated
+
+  - !writeStatus: { status: "Installing Zen", option: "browser-zen" }
+  - !powerShell:
+    command: '.\browser.ps1 -Zen'
+    exeDir: true
+    wait: true
+    weight: 120
+    option: "browser-zen"
     runas: currentUserElevated
 
     # Improve UI
-  - !writeStatus: {status: 'Configuring UI', option: "ui"}
+  - !writeStatus: { status: "Configuring UI", option: "ui" }
   - !run:
     exeDir: true
     exe: "ui.cmd"
     option: "ui-general"
     weight: 10
-    builds: [ '>=22000' ]
+    builds: [">=22000"]
   - !powerShell:
     command: '.\browser.ps1 -Ui'
     exeDir: true
     wait: true
     weight: 3
-    option: 'ui-sab'
-    runas: currentUserElevated 
-    builds: [ '>=22000' ]
+    option: "ui-sab"
+    runas: currentUserElevated
+    builds: [">=22000"]
   - !powerShell:
     command: '.\browser.ps1 -Sab'
     exeDir: true
     wait: true
     weight: 1
-    option: 'ui-sab'
-    runas: currentUserElevated 
-    builds: [ '>=22000' ]
-  - !cmd: {command: 'regedit.exe /s "Sound.reg"', exeDir: true, option: 'ui-general', wait: true}
+    option: "ui-sab"
+    runas: currentUserElevated
+    builds: [">=22000"]
+  - !cmd: {
+      command: 'regedit.exe /s "Sound.reg"',
+      exeDir: true,
+      option: "ui-general",
+      wait: true,
+    }
