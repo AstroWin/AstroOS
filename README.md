@@ -1,3 +1,6 @@
+<h2 align="center">⚠⚠ WARNING: AstroOS got discontinued.</h2>
+<h3 align="center">Support for it will be provided until June 30, 2025.</h3>
+
 <div align="center">
   <img src="https://raw.githubusercontent.com/AstroWin/.github/refs/heads/main/icon.png"  />
 </div>
